@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tạo link mời - Thiệp mời tốt nghiệp</title>
+  <meta name="description" content="Tạo link thiệp mời tốt nghiệp cá nhân hóa cho từng người bạn." />
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&family=Be+Vietnam+Pro:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <main class="gen">
+    <h1 class="gen__title">Tạo link mời bạn bè</h1>
+    <p class="gen__sub">Gõ tên người bạn muốn mời, hệ thống sẽ tạo link thiệp riêng cho từng người.</p>
+
+    <!-- ===== Chế độ đơn ===== -->
+    <section class="panel">
+      <h2 class="panel__title">Mời một người</h2>
+      <label class="field">
+        <span class="field__label">Tên người bạn muốn mời</span>
+        <input class="input" id="guestInput" type="text" placeholder="Ví dụ: Minh Anh" autocomplete="off" />
+      </label>
+
+      <span class="field__label">Link thiệp cá nhân hóa</span>
+      <div class="link-preview" id="linkPreview">...</div>
+
+      <div class="btn-row">
+        <button class="btn btn--primary btn--sm" id="copyBtn" type="button">Copy link</button>
+        <button class="btn btn--ghost btn--sm" id="openBtn" type="button">Mở thử</button>
+        <button class="btn btn--sm btn--fb" id="fbBtn" type="button">Chia sẻ Facebook</button>
+        <button class="btn btn--sm btn--zalo" id="zaloBtn" type="button">Chia sẻ Zalo</button>
+      </div>
+    </section>
+
+    <!-- ===== Chế độ hàng loạt ===== -->
+    <section class="panel">
+      <h2 class="panel__title">Tạo nhiều link cùng lúc</h2>
+      <label class="field">
+        <span class="field__label">Mỗi dòng một tên (hoặc ngăn cách bằng dấu phẩy)</span>
+        <textarea class="textarea" id="bulkInput" placeholder="Minh Anh&#10;Bảo Nam&#10;Thu Hà"></textarea>
+      </label>
+      <div class="btn-row">
+        <button class="btn btn--primary btn--sm" id="bulkBtn" type="button">Tạo danh sách link</button>
+      </div>
+
+      <div id="resultsWrap" style="display:none; margin-top:22px; overflow-x:auto;">
+        <table class="results">
+          <thead>
+            <tr>
+              <th>Tên khách</th>
+              <th>Link</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="resultsBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <a class="back-link" href="index.html">&#8592; Xem thử thiệp mời</a>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- GSAP (chỉ cần core cho animation nhẹ) -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/generator.js"></script>
+</body>
+</html>

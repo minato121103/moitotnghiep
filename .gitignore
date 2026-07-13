@@ -1,0 +1,12 @@
+# Test / tooling artifacts
+.playwright-mcp/
+*.png
+enc-test.txt
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+
+# Node (không dùng nhưng phòng khi cài serve cục bộ)
+node_modules/

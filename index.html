@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thiệp Mời Lễ Tốt Nghiệp</title>
+  <meta name="description" content="Thiệp mời lễ tốt nghiệp đại học - trân trọng kính mời bạn đến chung vui." />
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&family=Be+Vietnam+Pro:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/cinematic.css" />
+</head>
+<body>
+  <!-- ============================================================= -->
+  <!-- INTRO ĐIỆN ẢNH (overlay cố định, trên cùng, NGOÀI smooth-wrapper) -->
+  <!-- ============================================================= -->
+  <div class="cinema-intro" id="cinemaIntro">
+    <div class="curtain curtain--top" aria-hidden="true"></div>
+    <div class="curtain curtain--bottom" aria-hidden="true"></div>
+    <div class="intro-lottie" id="introLottie" aria-hidden="true"></div>
+    <div class="intro-titlecard">
+      <p class="intro-eyebrow">Trân trọng giới thiệu</p>
+      <h1 class="intro-title">Lễ Tốt Nghiệp</h1>
+      <p class="intro-year">Cử nhân &#183; 2026</p>
+    </div>
+    <button class="skip-intro" id="skipIntro" type="button">Bỏ qua &#9197;</button>
+  </div>
+
+  <!-- Nhân vật cử nhân (mascot SVG) cố định góc màn hình, NGOÀI smooth-wrapper -->
+  <div class="mascot" id="mascot" aria-hidden="true" style="display:none">
+    <svg viewBox="0 0 140 152" xmlns="http://www.w3.org/2000/svg">
+      <!-- thân áo tốt nghiệp -->
+      <path class="mascot__body" d="M38,152 C38,112 50,98 70,98 C90,98 102,112 102,152 Z" />
+      <!-- cổ áo -->
+      <path class="mascot__collar" d="M58,100 L70,122 L82,100 Z" />
+      <!-- tay vẫy -->
+      <g class="mascot__arm">
+        <rect x="93" y="98" width="12" height="32" rx="6" />
+        <circle cx="99" cy="94" r="7" />
+      </g>
+      <!-- đầu -->
+      <circle class="mascot__head" cx="70" cy="72" r="24" />
+      <!-- mặt -->
+      <circle class="mascot__eye" cx="62" cy="72" r="2.6" />
+      <circle class="mascot__eye" cx="78" cy="72" r="2.6" />
+      <path class="mascot__smile" d="M60,82 Q70,90 80,82" fill="none" />
+      <!-- vành mũ -->
+      <path class="mascot__cap-base" d="M52,52 Q70,44 88,52 L70,60 Z" />
+      <!-- mặt mũ cử nhân (hình thoi) -->
+      <path class="mascot__board" d="M70,36 L102,50 L70,64 L38,50 Z" />
+      <!-- núm + dây tua -->
+      <g class="mascot__tassel">
+        <path d="M70,50 L99,50 L99,74" fill="none" />
+        <circle cx="99" cy="78" r="4" />
+      </g>
+    </svg>
+  </div>
+
+  <!-- Lớp confetti/hạt lấp lánh phủ toàn màn hình (cố định, để NGOÀI smooth-wrapper) -->
+  <div class="fx-layer" id="fxLayer" aria-hidden="true"></div>
+
+  <!-- Mũ cử nhân bay theo MotionPath (cố định, để NGOÀI smooth-wrapper) -->
+  <div class="flying-cap" id="flyingCap" aria-hidden="true">&#127891;</div>
+
+  <!-- ========== MÀN 1: PHONG BÌ (overlay cố định, NGOÀI smooth-wrapper) ========== -->
+  <section class="envelope-scene" id="envelopeScene">
+    <div class="envelope" id="envelope">
+      <div class="envelope-flap"></div>
+      <div class="envelope-body">
+        <div class="wax-seal" id="waxSeal" data-flip-id="seal">
+          <span class="wax-seal__cap" aria-hidden="true">&#127891;</span>
+        </div>
+        <p class="envelope-hint">Chạm, kéo con dấu hoặc vuốt lên để mở thiệp</p>
+      </div>
+    </div>
+    <button class="open-btn" id="openBtn" type="button">Mở thiệp mời</button>
+  </section>
+
+  <!-- ScrollSmoother yêu cầu cấu trúc #smooth-wrapper > #smooth-content -->
+  <div id="smooth-wrapper">
+    <div id="smooth-content">
+      <main class="card" id="card">
+        <!-- Vệt sáng nền có parallax qua data-speed -->
+        <div class="bg-accent bg-accent--1" data-speed="0.8" aria-hidden="true"></div>
+        <div class="bg-accent bg-accent--2" data-speed="1.15" aria-hidden="true"></div>
+
+        <!-- ========== NỘI DUNG THIỆP ========== -->
+        <div class="invite" id="invite" aria-hidden="true">
+          <header class="invite__header">
+            <!-- Con dấu đích cho hiệu ứng Flip (morph từ phong bì sang thiệp) -->
+            <div class="invite__crest" id="inviteCrest" data-flip-id="seal" style="display:none" aria-hidden="true">&#127891;</div>
+            <p class="eyebrow" id="eyebrow">Trân trọng kính mời</p>
+            <h1 class="guest-name" id="guestName">bạn</h1>
+
+            <!-- Đường phân cách vẽ bằng DrawSVG -->
+            <div class="divider" data-reveal aria-hidden="true">
+              <svg class="divider__svg" viewBox="0 0 260 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="divider__line" d="M10,14 L110,14" />
+                <path class="divider__cap-path" d="M130,5 L147,14 L130,23 L113,14 Z" />
+                <path class="divider__cap-path" d="M130,5 L130,1" />
+                <path class="divider__line" d="M150,14 L250,14" />
+              </svg>
+            </div>
+          </header>
+
+          <section class="invite__host">
+            <p class="lead" id="loiNhan">Trân trọng kính mời bạn đến chung vui...</p>
+            <div class="host-block">
+              <p class="host-role">Chung vui cùng</p>
+              <h2 class="host-name" id="tenChuNhan">Tên chủ nhân</h2>
+              <p class="host-degree">
+                <span id="bangCap">Cử nhân</span>
+                <span class="dot">&#8226;</span>
+                <span id="nganh">Ngành học</span>
+              </p>
+              <p class="host-school" id="truong">Tên trường</p>
+            </div>
+          </section>
+
+          <!-- ========== CHI TIẾT SỰ KIỆN (ScrollTrigger + Lottie cúp scrub) ========== -->
+          <section class="invite__event" id="eventSection">
+            <div class="lottie-trophy" id="lottieTrophy" aria-hidden="true"></div>
+            <h3 class="section-title" data-speed="0.92">Thông tin buổi lễ</h3>
+            <div class="event-grid">
+              <div class="event-item" data-reveal>
+                <span class="event-item__medal" aria-hidden="true">
+                  <svg class="event-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3.5" y="5" width="17" height="15" rx="2.5" />
+                    <path d="M3.5 9.5H20.5" />
+                    <path d="M8 3v3.4M16 3v3.4" />
+                    <circle cx="8" cy="13.6" r="0.9" />
+                    <circle cx="12" cy="13.6" r="0.9" />
+                    <circle cx="16" cy="13.6" r="0.9" />
+                  </svg>
+                </span>
+                <span class="event-item__label">Ngày</span>
+                <span class="event-item__value" id="ngayLe">--/--/----</span>
+              </div>
+              <div class="event-item" data-reveal>
+                <span class="event-item__medal" aria-hidden="true">
+                  <svg class="event-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="8.5" />
+                    <path d="M12 7.2V12l3.2 2" />
+                  </svg>
+                </span>
+                <span class="event-item__label">Giờ</span>
+                <span class="event-item__value" id="gioLe">--:--</span>
+              </div>
+              <div class="event-item" data-reveal>
+                <span class="event-item__medal" aria-hidden="true">
+                  <svg class="event-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 21c4.5-4.2 6.8-7.6 6.8-10.6a6.8 6.8 0 0 0-13.6 0C5.2 13.4 7.5 16.8 12 21Z" />
+                    <circle cx="12" cy="10.3" r="2.5" />
+                  </svg>
+                </span>
+                <span class="event-item__label">Địa điểm</span>
+                <span class="event-item__value" id="diaDiem">Địa điểm</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- ========== ĂN MỪNG (Lottie pháo giấy) ========== -->
+          <section class="invite__celebrate" id="celebrateSection">
+            <div class="lottie-celebrate" id="lottieCelebrate" aria-hidden="true"></div>
+            <h3 class="celebrate-title" id="celebrateTitle" data-speed="1.08">Hẹn gặp bạn tại lễ tốt nghiệp!</h3>
+            <p class="celebrate-sub">Sự hiện diện của bạn là niềm vinh hạnh của mình.</p>
+          </section>
+
+          <!-- ========== NÚT HÀNH ĐỘNG ========== -->
+          <footer class="invite__actions">
+            <a class="btn btn--primary" id="mapsBtn" href="#" target="_blank" rel="noopener">
+              <span aria-hidden="true">&#128506;</span> Xem địa điểm
+            </a>
+            <a class="btn btn--ghost" id="calendarBtn" href="#" download="le-tot-nghiep.ics">
+              <span aria-hidden="true">&#128198;</span> Thêm vào lịch
+            </a>
+          </footer>
+
+          <!-- Chữ ký viết tay vẽ bằng DrawSVG, kèm text dự phòng cho khả năng tiếp cận -->
+          <div class="signature-wrap" data-reveal>
+            <svg class="signature-svg" viewBox="0 0 310 90" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path class="signature-path" d="M12,54 C26,22 42,20 50,42 C56,60 42,68 46,45 C50,24 70,22 84,45 C94,61 78,71 84,47 C90,26 114,26 128,48 C138,64 122,74 128,50 C134,30 158,32 170,52 C180,68 198,60 214,40" />
+              <path class="signature-path" d="M8,72 C74,86 214,86 302,58 C272,74 122,78 42,71" />
+            </svg>
+            <p class="signature">Với tất cả sự trân trọng</p>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- ========== GSAP + PLUGINS (jsdelivr CDN) ========== -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomEase.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/DrawSVGPlugin.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Flip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Observer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Draggable.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/InertiaPlugin.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MotionPathPlugin.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+
+  <!-- lottie-web để phát hoạt hình Lottie -->
+  <script src="https://cdn.jsdelivr.net/npm/lottie-web@5.12.2/build/player/lottie.min.js"></script>
+
+  <!-- Cấu hình + logic -->
+  <script src="js/config.js"></script>
+  <script src="js/invitation.js"></script>
+  <script src="js/cinematic.js"></script>
+</body>
+</html>
