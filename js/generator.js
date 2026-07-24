@@ -19,9 +19,16 @@
     return origin + path;
   }
 
-  function buildLink(name) {
+  function buildLink(name, salutation) {
     var clean = (name || "").trim();
-    return baseInviteUrl() + "?ten=" + encodeURIComponent(clean);
+    var cleanSalutation = (salutation || "bạn").trim();
+    return (
+      baseInviteUrl() +
+      "?xungho=" +
+      encodeURIComponent(cleanSalutation) +
+      "&ten=" +
+      encodeURIComponent(clean)
+    );
   }
 
   /* ---------- Tiện ích ---------- */
@@ -72,11 +79,15 @@
 
   /* ---------- Chế độ đơn ---------- */
   var nameInput = $("guestInput");
+  var salutationInput = $("salutationInput");
   var preview = $("linkPreview");
   var previewInviteLink = $("previewInviteLink");
 
   function currentLink() {
-    return buildLink(nameInput ? nameInput.value : "");
+    return buildLink(
+      nameInput ? nameInput.value : "",
+      salutationInput ? salutationInput.value : "bạn"
+    );
   }
   function updatePreview() {
     var link = currentLink();
@@ -86,6 +97,10 @@
   if (nameInput) {
     nameInput.addEventListener("input", updatePreview);
     updatePreview();
+  }
+
+  if (salutationInput) {
+    salutationInput.addEventListener("change", updatePreview);
   }
 
   var copyBtn = $("copyBtn");
@@ -154,7 +169,10 @@
     }
 
     names.forEach(function (name) {
-      var link = buildLink(name);
+      var link = buildLink(
+        name,
+        salutationInput ? salutationInput.value : "bạn"
+      );
       var tr = document.createElement("tr");
 
       var tdName = document.createElement("td");

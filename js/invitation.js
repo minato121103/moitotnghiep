@@ -17,20 +17,30 @@
     var el = document.getElementById(id);
     if (el && value != null && value !== "") el.textContent = value;
   }
-  function getGuestName() {
+  function getInvitee() {
     try {
       var params = new URLSearchParams(window.location.search);
       var ten = (params.get("ten") || "").trim();
-      return ten || "bạn";
+      var xungHo = (params.get("xungho") || "bạn").trim();
+      return {
+        ten: ten,
+        xungHo: xungHo || "bạn",
+      };
     } catch (e) {
-      return "bạn";
+      return {
+        ten: "",
+        xungHo: "bạn",
+      };
     }
   }
 
   /* ---------- Đổ dữ liệu vào thiệp ---------- */
-  var guest = getGuestName();
+  var invitee = getInvitee();
+  var guest = invitee.ten
+    ? invitee.xungHo + " " + invitee.ten
+    : invitee.xungHo;
   document.title = "Thiệp mời tốt nghiệp - Thân mời " + guest;
-  setText("guestName", guest === "bạn" ? "bạn" : "bạn " + guest);
+  setText("guestName", guest);
   setText("loiNhan", CONFIG.loiNhan);
   setText("tenChuNhan", CONFIG.tenChuNhan);
   setText("bangCap", CONFIG.bangCap);

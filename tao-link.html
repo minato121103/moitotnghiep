@@ -25,6 +25,21 @@
     <section class="panel">
       <h2 class="panel__title">Mời một người</h2>
       <label class="field">
+        <span class="field__label">Cách xưng hô</span>
+        <select class="input" id="salutationInput">
+          <option value="bạn">Bạn</option>
+          <option value="anh">Anh</option>
+          <option value="chị">Chị</option>
+          <option value="em">Em</option>
+          <option value="cô">Cô</option>
+          <option value="chú">Chú</option>
+          <option value="bác">Bác</option>
+          <option value="ông">Ông</option>
+          <option value="bà">Bà</option>
+          <option value="thầy">Thầy</option>
+        </select>
+      </label>
+      <label class="field">
         <span class="field__label">Tên người bạn muốn mời</span>
         <input class="input" id="guestInput" type="text" placeholder="Ví dụ: Minh Anh" autocomplete="off" />
       </label>
@@ -73,6 +88,6 @@
   <!-- GSAP (chỉ cần core cho animation nhẹ) -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
   <script src="js/config.js"></script>
-  <script src="js/generator.js?v=3"></script>
+  <script src="js/generator.js?v=4"></script>
 </body>
 </html>
