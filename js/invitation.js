@@ -30,7 +30,7 @@
   /* ---------- Đổ dữ liệu vào thiệp ---------- */
   var guest = getGuestName();
   document.title = "Thiệp mời tốt nghiệp - Thân mời " + guest;
-  setText("guestName", guest);
+  setText("guestName", guest === "bạn" ? "bạn" : "bạn " + guest);
   setText("loiNhan", CONFIG.loiNhan);
   setText("tenChuNhan", CONFIG.tenChuNhan);
   setText("bangCap", CONFIG.bangCap);

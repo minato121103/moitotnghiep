@@ -16,7 +16,7 @@
       // Mở bằng file:// -> origin là "null"
       return window.location.href.replace(/[^\/]*$/, "") + "index.html";
     }
-    return origin + path + "index.html";
+    return origin + path;
   }
 
   function buildLink(name) {
@@ -73,12 +73,15 @@
   /* ---------- Chế độ đơn ---------- */
   var nameInput = $("guestInput");
   var preview = $("linkPreview");
+  var previewInviteLink = $("previewInviteLink");
 
   function currentLink() {
     return buildLink(nameInput ? nameInput.value : "");
   }
   function updatePreview() {
-    if (preview) preview.textContent = currentLink();
+    var link = currentLink();
+    if (preview) preview.textContent = link;
+    if (previewInviteLink) previewInviteLink.href = link;
   }
   if (nameInput) {
     nameInput.addEventListener("input", updatePreview);

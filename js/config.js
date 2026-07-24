@@ -11,7 +11,7 @@
    ========================================================================== */
 window.CONFIG = {
   // SỬA: tên của bạn (người tốt nghiệp / chủ nhân thiệp mời)
-  tenChuNhan: "Tạ Xuân Nguyên",
+  tenChuNhan: "Bùi Vương Trưởng",
 
   // Bằng cấp — mặc định "Cử nhân". SỬA nếu khác (VD "Kỹ sư").
   bangCap: "Cử nhân",
